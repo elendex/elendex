@@ -158,5 +158,3 @@ Enlazar el proyecto en local con el repositorio en GitHub
 
 Subir nuestro proyecto en local a GitHub
   git push -u origin main
-
-nueva linea
