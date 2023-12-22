@@ -1,0 +1,160 @@
+Curso de GIT y GITHUB desde CERO - MoureDev
+https://www.youtube.com/watch?v=3GymExBkKjE&t=4784s
+
+HOJA DE REFERENCIA PARA GITHUB GIT
+https://training.github.com/downloads/es_ES/github-git-cheat-sheet.pdf
+
+https://ohmyz.sh => Tunear la terminal
+
+https://docs.github.com/es
+----------------------------------------------------------------------------------------
+
+pwd
+La ruta actual.
+
+mkdir
+Crea una carpeta. 
+Ejemplo: mkdir "Nueva carpeta"
+
+ls
+Lista los directorios.
+
+touch
+Crea una archivo.
+Ejemplo: touch index.php
+
+--- COMANDOS  GIT ---
+
+git --version / -v
+Devuelve la versión de Git.
+
+git --help / -h
+Ayuda de git.
+
+git config
+Configura el usuario para trabajar con GIT.
+Para establecer a nivel global se usa la directiva --global
+Ejemplo: git config --global user.name "Ezequiel Allende"
+Ejemplo: git config --global user.email "ezequiel@objetivovirtual.com"
+
+git init
+Inicializa GIT en el directorio.
+
+git status
+Devuelve el estado actual del repositorio. Indica si hay archivos no trackeados por GIT.
+
+git branch -m 
+Cambia el nombre de la rama. 
+Ejemplo: git branch -m main
+
+git add
+Agrega archivos al "stage" para ser commiteados.
+Ejemplo: git add index.php
+Ejemplo: git add . (agrega todos los archivos del directorio)
+
+git commit
+Guarda los cambios echos en los archivos añadidos al area de "stage". Se le puede dar un mensaje al commit agregando el parámetro -m.
+Ejemplo: git commit -m "Aprendiendo GIT"
+
+git log
+Muestra los commits.
+Se le puede añadir el parámetro --graph. Ejemplo: git log --graph
+Se le puede añadir la opción --pretty. Ejemplo: git log --graph --pretty=oneline
+Se le puede añadir la opción --decorate. Ejemplo: git log --graph --decorate --all --oneline
+
+git reflog
+Es un git log pero con mas información.
+
+git checkout
+Es para situarnos en un punto en concreto. Mueve el puntero HEAD.
+Ejemplo: git checkout index.php
+También podemos desplazarnos hacia un punto en concreto en la rama (un commit).
+Ejemplo: git checkout <hash>
+
+Si queremos apuntar a donde está apuntando el main hacemos:
+  git checkout main
+
+git reset
+Vuelve para atras a la última fotografía o commmit.
+
+git reset --hard
+Funciona para eliminar commits o reestablecerlos. Hay que indicarle el hash del commit al que queremos llegar. 
+Ejemplo: git reset --hard c10718 => Se van a eliminar todos los commits que esten después del commit c10718
+
+git alias
+Establece un alias para ejecutar ciertos comandos que guardemos en el alias.
+Ejemplo: git config --global alias.tree "log --graph --decorate --all --oneline" . "tree" es el nombre que le dimos al alias. Se puede poner otra cosa.
+Después para ejecutarlo es: git <nombre del alias> . En este caso: git tree
+
+.gitignore
+Este archivos nos sirve para indicar a GIT cuales son los archivos que no queremos tener en cuenta para añadir al area de stage.
+Tenemos que crear este archivo y dentro indicarle que rutas, archivos o expresiones que tiene que ignorar a la hora de mostrar el status del proyecto.
+Se agregan archivos así: 
+**/.notas (los dos asteriscos indican que no importa el directorio donde se encuentre este archivos, que lo ignore igual)
+Este archivo .gitignore debemos agregarlo al area de stage y posteriormente hacer commit para que sea parte del proyecto. Esto va a hacer que 
+podamos decirle a GIT que este archivos tiene que tenerlo en cuenta porque puede ir cambiando.
+
+git diff
+Nos devuelve información sobre cambios que se hayan echo en los archivos.
+También se pueden comparar ramas:
+  git diff otra_rama
+
+git tree
+Nos muestra información simplificada de los commits que se hicieron.
+
+git tag
+Establece una etiqueta en el commit que estamos situados. 
+  Ejemplo: git tag clase_1
+Si solamente escribimos:
+  git tag
+Obtenemos todos los tag del proyecot.
+Los tags los podemos usar para movernos por las ramas. 
+  Ejemplo: git checkout tags/clase_1
+Esto va a hacer que el puntero HEAD apunte al commit que tiene asignado este tag.
+
+git revert (buscar info. Elimina un commit en concreto)
+
+git branch
+Crea una nueva rama a partir del commit en el que estamos situados.
+  Ejemplo: git branch nueva_rama
+Se puede eliminar una rama también.
+  Ejemplo: git branch -d <nombre de la rama>
+Al eliminar una rama, la eliminamos oficialmente del flujo de trabajo oficial. Pero la rama no se elimina completamente. Dentro del proyecto
+quedan referencias para acceder a esa rama eliminada. Utilizando el comando reflog podemos llegar a ver alguna referencia (algún commit) para
+poder acceder a el mediante el comando checkout.
+
+
+git switch
+Para desplazarnos por las ramas.
+  Ejemplo: git switch main => nos vamos a la rama main
+  Ejemplo: git switch nueva_rama => vamos a la rama nueva_rama
+
+git merge
+Este comando trae los cambios que se han echo en otra rama.
+Estando en la rama main, y teniendo otra llamada login, si estamos ubicados en la rama main hacemos:
+  git merge login
+Si no hay conflictos, entonces esto va a crear un nuevo commit por delante en el tiempo del último commit de la rama que hicimmos merge.
+Cuando hay conflictos hay que solucionarlos eliminando lo que no queremos que quede en el próximo commit. Estos conflictos se dan porque 
+las dos ramas estan modificando las mismas lineas de código.
+Solucionado el conflicto se procede a agregar el archivo modificado al area de stage y a continuación el commit.
+
+git stash
+Es como el commit pero guarda una captura del proyecto de manera temporal. Este commit temporal no va a formar parte de la rama.
+Para saber todos los stash que guardamos hacemos: 
+  git stash list
+Si queres traer el progreso guardado en el stash hacemos: 
+  git stash pop
+Si queremos eliminar lo que hay en stash:
+  git stash drop
+
+
+--- GITHUB ---
+
+Autenticación SSH (https://docs.github.com/es/authentication)
+De esta manera podemos conectar nuestra PC a GitHub.
+
+Enlazar el proyecto en local con el repositorio en GitHub
+  Ejemplo: git remote add origin <repositorio>
+
+Subir nuestro proyecto en local a GitHub
+  git push -u origin main
